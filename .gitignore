@@ -1,0 +1,8 @@
+# 旅行社原始手冊（有版權，不上傳）
+docs/*.pdf
+
+# 產生的 Artifact 版（由 tools/build_artifact.mjs 產生）
+dist/
+
+__pycache__/
+*.pyc

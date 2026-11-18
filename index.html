@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>奧捷經典10日 行程地圖</title>
+  <meta name="description" content="奧地利捷克經典10日行程互動地圖：每日路線、景點、餐食與住宿。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Oswald:wght@300;400&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="panel" aria-label="行程內容">
+      <header class="panel-head">
+        <div class="brand">
+          <span class="series">印象系列</span>
+          <h1>奧地利捷克經典10日</h1>
+        </div>
+        <button class="icon-btn theme-btn" type="button" aria-label="切換深淺色" title="切換深淺色">
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        </button>
+      </header>
+      <nav class="day-tabs" id="dayTabs" role="tablist" aria-label="選擇天數"></nav>
+      <div class="panel-body" id="panelBody" tabindex="-1"></div>
+      <footer class="panel-foot">
+        <button class="nav-btn" id="prevBtn" type="button">‹ 上一天</button>
+        <span class="page-info" id="pageInfo"></span>
+        <button class="nav-btn" id="nextBtn" type="button">下一天 ›</button>
+      </footer>
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map" aria-label="行程地圖"></div>
+
+      <div class="map-caption" id="mapCaption" aria-live="polite"></div>
+
+      <div class="map-tools">
+        <div class="tool-row">
+          <button class="icon-btn theme-btn mobile-only" type="button" aria-label="切換深淺色">
+            <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1.5 12h3M19.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+          </button>
+          <button class="tool-btn" id="playBtn" type="button" aria-pressed="false">
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+            <span>播放行程</span>
+          </button>
+        </div>
+        <div class="toggles" role="group" aria-label="圖層">
+          <label><input type="checkbox" id="tgSights" checked> 景點</label>
+          <label><input type="checkbox" id="tgHotels" checked> 飯店</label>
+          <select id="baseSel" aria-label="底圖">
+            <option value="canvas">簡潔</option>
+            <option value="street">街道</option>
+            <option value="sat">衛星</option>
+          </select>
+        </div>
+      </div>
+
+      <details class="legend" id="legend">
+        <summary>圖例</summary>
+        <ul>
+          <li><span class="lg lg-capital"></span>首都</li>
+          <li><span class="lg lg-city">1</span>景點城市（造訪順序）</li>
+          <li><span class="lg lg-sight">▲</span>外觀／下車參觀</li>
+          <li><span class="lg lg-sight">★</span>入內參觀（團費含）</li>
+          <li><span class="lg lg-sight">◆</span>自由活動推薦</li>
+          <li><span class="lg lg-hotel"></span>住宿飯店（備選）</li>
+          <li><span class="lg lg-road"></span>遊覽車（每日一色）</li>
+          <li><span class="lg lg-flight"></span>飛機</li>
+        </ul>
+      </details>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="data/itinerary.js"></script>
+  <script src="data/routes.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
