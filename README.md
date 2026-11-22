@@ -22,4 +22,4 @@
 
 ## 資料來源
 
-行程內容與照片：加利利旅遊行程手冊（印象系列）。地圖：Esri、Natural Earth、© OpenStreetMap contributors；路線：OSRM。
+行程內容與照片：加利利旅遊行程手冊（印象系列）；飯店、航班、餐食依 2026/12/03 出發團行程手冊（`docs/奧捷行程.pdf`，未納入版控）更新。地圖：Esri、Natural Earth、© OpenStreetMap contributors；路線：OSRM。

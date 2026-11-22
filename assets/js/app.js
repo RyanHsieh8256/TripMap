@@ -355,9 +355,9 @@
         title: h.name
       });
       m.bindPopup(`<div class="pop-body">
-          <div class="pop-kicker">Day ${d.day} 住宿備選</div>
+          <div class="pop-kicker">Day ${d.day}${d.date ? ` ${esc(d.date)}` : ""} 住宿</div>
           <div class="pop-title">${esc(h.name)}<small>${stars(h.stars)} ${h.stars} 星${h.approx ? "・位置約略" : ""}</small></div>
-          <p>${esc(d.stay)}</p>
+          <p>${esc(h.addr || d.stay)}${h.tel ? `<br>Tel ${esc(h.tel)}` : ""}</p>
         </div>`, { className: "pop-noimg", maxWidth: 260 });
       m.addTo(hotels);
       hotelRefs[`${d.day}-${j}`] = m;
@@ -435,8 +435,10 @@
         <div class="hero-text">
           <h2 class="hero-title">${esc(T.title)}</h2>
           <p>${esc(T.subtitle)}</p>
+          ${T.dates ? `<p class="hero-dates">${esc(T.dates)}</p>` : ""}
         </div>
       </div>
+      ${T.meetup ? `<div class="meetup"><b>集合</b><span>${esc(T.meetup.time)}・${esc(T.meetup.where)}</span></div>` : ""}
       <div class="stats">
         <div class="stat"><b>${LAST}</b><span>天</span></div>
         <div class="stat"><b>2</b><span>國家</span></div>
@@ -449,7 +451,7 @@
         <ul class="day-list">
           ${DAYS.map((d) => `<li><button class="day-item" data-goto-day="${d.day}" style="--c:${DAY_COLORS[d.day]}">
             <span class="num">${d.day}</span>
-            <span><span class="t">${esc(d.title)}</span><span class="s">${esc(d.tagline)}</span></span>
+            <span><span class="t">${esc(d.title)}</span><span class="s">${d.date ? `${esc(d.date)}・` : ""}${esc(d.tagline)}</span></span>
             <span class="km">${dayKm(d) ? `${dayKm(d)} km` : d.mode === "flight" ? "✈" : "市區"}</span>
           </button></li>`).join("")}
         </ul>
@@ -482,7 +484,7 @@
       </section>
 
       <section class="section">
-        <h2 class="section-title">參考航班・${esc(f.airline)}</h2>
+        <h2 class="section-title">航班・${esc(f.airline)}</h2>
         <div class="cards">${flightCard(f.outbound, 1)}${flightCard(f.inbound, 9)}</div>
         <p class="flight-note">${esc(f.note)}</p>
       </section>
@@ -493,12 +495,12 @@
         <ul class="ticks notes" style="margin-top:12px">${T.generalNotes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>
       </section>
 
-      <p class="source">資料來源：${esc(T.source)}。景點順序、飯店與航班以行前說明會資料為準。</p>`;
+      <p class="source">資料來源：${esc(T.source)}。如遇不可抗拒之情況，旅行社保有變更行程、飯店及班機之權利。</p>`;
   }
 
   function flightCard(fl, day) {
     return `<div class="flight" style="--c:${DAY_COLORS[day]}">
-      <div class="flight-top"><b>${esc(fl.no)}</b><span>Day ${day}</span></div>
+      <div class="flight-top"><b>${esc(fl.no)}</b><span>Day ${day}${fl.date ? `・${esc(fl.date)}` : ""}</span></div>
       <div class="flight-row">
         <div><b>${esc(fl.dep)}</b><span>${esc(fl.from)}</span></div>
         <div class="flight-mid">${esc(fl.duration)}<br>${esc(fl.via)}</div>
@@ -523,7 +525,7 @@
 
     return `<div style="--c:${color}">
       <header class="day-head">
-        <div class="day-num"><span>DAY</span>${d.day}</div>
+        <div class="day-num"><span>DAY</span>${d.day}${d.date ? `<em class="day-date">${esc(d.date)}</em>` : ""}</div>
         <h2>${esc(d.title)}</h2>
         <p class="tagline">${esc(d.tagline)}</p>
         ${d.intro ? `<p class="day-intro">${esc(d.intro)}</p>` : ""}
@@ -536,7 +538,7 @@
         ${dayKm(d) ? `<div class="chain-total">當日車程約 <b>${dayKm(d)} km</b></div>` : ""}
       </section>` : ""}
 
-      ${d.flight ? `<section class="section"><h2 class="section-title">參考航班</h2>${flightCard(T.flights[d.flight], d.day)}<p class="flight-note">${esc(T.flights.note)}</p></section>` : ""}
+      ${d.flight ? `<section class="section"><h2 class="section-title">航班</h2>${flightCard(T.flights[d.flight], d.day)}<p class="flight-note">${esc(T.flights.note)}</p></section>` : ""}
 
       ${d.sights.length ? `<section class="section">
         <h2 class="section-title">景點</h2>
@@ -564,9 +566,9 @@
         ${d.hotelImg ? `<div class="stay-img"><img src="${esc(d.hotelImg)}" alt="" loading="lazy"></div>` : ""}
         ${hotels.length ? `<ul class="hotels">
           ${hotels.map((h, j) => `<li><button class="hotel-btn" data-hotel="${d.day}-${j}">
-            <span class="stars">${stars(h.stars)}</span><span>${esc(h.name)}</span>${h.approx ? '<span class="approx">位置約略</span>' : ""}
+            <span class="stars">${stars(h.stars)}</span><span class="hotel-name">${esc(h.name)}${h.addr ? `<small>${esc(h.addr)}${h.tel ? `・Tel ${esc(h.tel)}` : ""}</small>` : ""}</span>${h.approx ? '<span class="approx">位置約略</span>' : ""}
           </button></li>`).join("")}
-        </ul><p class="small muted" style="margin-top:6px">以上擇一入住或同等級</p>` : ""}
+        </ul>${hotels.length > 1 ? '<p class="small muted" style="margin-top:6px">以上擇一入住或同等級</p>' : ""}` : ""}
       </section>
 
       ${d.included.length ? `<section class="section"><h2 class="section-title">團費包含</h2>

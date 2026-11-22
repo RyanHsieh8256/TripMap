@@ -1,6 +1,7 @@
 /*
  * 奧地利捷克經典10日 — 行程資料
- * 來源：docs/加利利 奧捷經典10日.pdf
+ * 來源：docs/奧捷行程.pdf（2026/12/03 出發團行程手冊：飯店、航班、餐食已確認）
+ *      早期版本依 docs/加利利 奧捷經典10日.pdf（產品介紹）
  *
  * 景點 type：
  *   view   = ▲ 外觀／下車參觀
@@ -15,7 +16,9 @@ window.TRIP = {
   subtitle: "漫步布拉格・沉醉庫倫洛夫・雙首都五星連泊",
   hero: "assets/img/hero-krumlov.jpg",
   totalKm: 1281,
-  source: "加利利旅遊 行程手冊（印象系列）",
+  dates: "2026/12/03（四）– 12/12（六）",
+  meetup: { time: "2026/12/03（四）19:30", where: "桃園機場第二航廈 長榮航空團體櫃檯" },
+  source: "加利利旅遊 行程手冊（2026/12/03 出發團）",
 
   places: {
     tpe:          { name: "台北（桃園機場）", en: "Taipei TPE", lat: 25.0797, lng: 121.2342, kind: "airport" },
@@ -36,10 +39,10 @@ window.TRIP = {
   tourOrder: ["vienna", "hallstatt", "salzkammergut", "salzburg", "krumlov", "marianske", "karlovy", "prague", "telc"],
 
   flights: {
-    airline: "長榮航空（參考航班）",
-    outbound: { no: "BR061", from: "TPE 台北", to: "VIE 維也納", dep: "22:30", arr: "08:10 +1", duration: "16 小時 5 分", via: "中停曼谷" },
-    inbound:  { no: "BR062", from: "VIE 維也納", to: "TPE 台北", dep: "17:55", arr: "16:00 +1", duration: "15 小時 55 分", via: "中停曼谷" },
-    note: "以上為參考資訊，實際航班時間及轉機點以說明會資料為最終確認。"
+    airline: "長榮航空",
+    outbound: { no: "BR061", date: "12/03（四）", from: "TPE 台北", to: "VIE 維也納", dep: "22:30", arr: "08:10 +1", duration: "16 小時 40 分", via: "中停曼谷" },
+    inbound:  { no: "BR062", date: "12/11（五）", from: "VIE 維也納", to: "TPE 台北", dep: "14:55", arr: "13:05 +1", duration: "15 小時 10 分", via: "中停曼谷" },
+    note: "時間皆為當地時間。如遇不可抗拒之情況，旅行社保有變更飯店及班機之權利。"
   },
 
   highlights: [
@@ -51,7 +54,7 @@ window.TRIP = {
   foods: [
     { title: "布拉格地標・跳舞的房子景觀餐廳", day: 6, img: "assets/img/food-dancing-house.jpg", desc: "精緻的法式料理，搭配景觀窗台，用布拉格美景佐餐，餐後還可到頂樓眺望一整片的紅瓦城堡！" },
     { title: "豪爽美饌・維也納豬肋排", day: 8, img: "assets/img/food-ribs.jpg", desc: "外層酥脆的巨大豬肋排，鹹甜醬汁淋漓釀味，烤得恰到好處的鮮嫩肉品。" },
-    { title: "在地佳餚・波西米亞傳統料理", day: 5, img: "assets/img/food-pork-knuckle.jpg", desc: "安排波西米亞豬腳、炸豬排，豐富的特色佳餚，為旅程增添味蕾風采。" },
+    { title: "在地佳餚・波西米亞傳統料理", day: 4, img: "assets/img/food-pork-knuckle.jpg", desc: "安排波西米亞豬腳、炸豬排，豐富的特色佳餚，為旅程增添味蕾風采。" },
     { title: "仙境湖區・鱒魚美饌", day: null, where: "奧地利湖區", img: "assets/img/food-trout.jpg", desc: "奧地利的高山湖區，澄澈的水源培育著豐美鱒魚，鮮甜滋味深深擄獲您的味蕾！" }
   ],
 
@@ -62,14 +65,15 @@ window.TRIP = {
   ],
 
   generalNotes: [
-    "薩爾茲堡、薩茲卡瑪谷位置鄰近，旅程順序將視當團飯店確認後調整，實際行程請依行前說明會資料為準。",
     "若因交通、氣候等不可抗因素影響，領隊將視實際狀況做最佳調整。",
-    "飯店、餐廳若客滿或休息，將安排其他同等級選擇。"
+    "餐廳若客滿或休息，將安排其他同等級選擇。",
+    "團體菜單固定，特殊餐食（如海鮮過敏、不吃牛）需事先向旅遊專員提出，現場無法臨時更換。"
   ],
 
   days: [
     {
       day: 1,
+      date: "12/03（四）",
       title: "台北 ✈ 維也納",
       tagline: "邂逅浪漫國度",
       mode: "flight",
@@ -89,6 +93,7 @@ window.TRIP = {
     },
     {
       day: 2,
+      date: "12/04（五）",
       title: "維也納－哈斯達特－薩茲卡瑪谷",
       tagline: "阿爾卑斯湖區的桃花源",
       route: ["vie_airport", "hallstatt", "salzkammergut"],
@@ -105,20 +110,19 @@ window.TRIP = {
           desc: "語意為鹽湖區的薩茲卡瑪谷高山湖區，由阿爾卑斯山群所環繞，湖區內共有76個大大小小如寶石般的湖泊，包含夢湖、聖沃夫岡湖、巴德伊修等，已於1997年列入世界遺產。"
         }
       ],
-      meals: { b: "飛機上", l: "鄉村風味料理", d: "湖區西式風味餐" },
-      stay: "薩茲卡瑪谷",
+      meals: { b: "飛機上", l: "奧地利風味料理", d: "湖區風味餐" },
+      stay: "薩茲卡瑪谷（聖沃夫岡）",
       hotelImg: "assets/img/hotel-lake.jpg",
       hotelDesc: "遨遊空靈純淨的高山湖區，入住舒適爾雅的湖區飯店，親近奧地利最美的仙境小鎮。",
       hotels: [
-        { name: "Scalaria Event Resort", stars: 4, lat: 47.73932, lng: 13.44566 },
-        { name: "Hotel Margaretha", stars: 4, lat: 47.7392, lng: 13.4405, approx: true },
-        { name: "白馬飯店 Hotel Weisses Rössl", stars: 4, lat: 47.73855, lng: 13.43735 }
+        { name: "Scalaria Event Resort", stars: 4, lat: 47.73932, lng: 13.44566, addr: "See 1, 5360 St. Wolfgang, Austria", tel: "+43-613-880-00" }
       ],
       included: [],
       notes: ["因航班組合眾多，抵達時間和行程順序請依行前說明會為準。"]
     },
     {
       day: 3,
+      date: "12/05（六）",
       title: "薩茲卡瑪谷－薩爾茲堡－庫倫洛夫",
       tagline: "真善美之城與童話紅瓦小鎮",
       route: ["salzkammergut", "salzburg", "krumlov"],
@@ -145,22 +149,19 @@ window.TRIP = {
         }
       ],
       meals: { b: "飯店內自助式", l: "中式八菜一湯", d: "捷克傳統風味餐" },
-      stay: "庫倫洛夫（或巴德傑維契／琥珀卡）",
+      stay: "庫倫洛夫（舊城區）",
       hotels: [
-        { name: "Hotel OLDINN", stars: 4, lat: 48.8106, lng: 14.31443 },
-        { name: "Hotel Grand", stars: 4, lat: 48.81068, lng: 14.3156 },
-        { name: "Bellevue Hotel", stars: 4, lat: 48.8135, lng: 14.31744 },
-        { name: "Hotel Ruze", stars: 4, lat: 48.81044, lng: 14.31751 }
+        { name: "Hotel Ruze", stars: 4, lat: 48.81044, lng: 14.31751, addr: "Horní 154, 381 01 Český Krumlov, Czech Republic", tel: "+420-380-772-100" }
       ],
       included: ["薩爾茲堡（含專業中文導遊）"],
       notes: [
-        "庫倫洛夫多為石板路，遊覽車無法進出，請另備過夜包。",
-        "薩爾茲堡、薩茲卡瑪谷位置鄰近，順序可能依當團飯店調整。"
+        "庫倫洛夫多為石板路，遊覽車無法進出，請另備過夜包。"
       ]
     },
     {
       day: 4,
-      title: "庫倫洛夫－瑪麗安斯凱",
+      date: "12/06（日）",
+      title: "庫倫洛夫 市區觀光－瑪麗安斯凱",
       tagline: "古堡俯瞰與森林溫泉鄉",
       route: ["krumlov", "marianske"],
       km: [226],
@@ -177,16 +178,16 @@ window.TRIP = {
         }
       ],
       meals: { b: "飯店內自助式", l: "波西米亞風味餐", d: "飯店主廚推薦餐" },
-      stay: "瑪麗安斯凱（或卡洛維瓦利）",
+      stay: "瑪麗安斯凱",
       hotels: [
-        { name: "Esplanade Hotel（瑪麗安斯凱）", stars: 5, lat: 49.9770, lng: 12.7126 },
-        { name: "Grandhotel Pupp（卡洛維瓦利）", stars: 5, lat: 50.21915, lng: 12.87878 }
+        { name: "Hotel Esplanade Spa & Golf Resort", stars: 5, lat: 49.97680, lng: 12.71269, addr: "Karlovarská 438, 353 01 Mariánské Lázně, Czech Republic", tel: "+420-354-676-617" }
       ],
       included: [],
       notes: []
     },
     {
       day: 5,
+      date: "12/07（一）",
       title: "瑪麗安斯凱－卡洛維瓦利－布拉格",
       tagline: "溫泉迴廊到百塔之城",
       route: ["marianske", "karlovy", "prague"],
@@ -203,7 +204,7 @@ window.TRIP = {
           desc: "唯美的房屋與高塔，雲集在布拉格，形成一整片紅瓦白牆之景，成就「百塔之城」的美名，因此世人也常說，布拉格是以城堡撰寫的詩篇，凡是讀過的人們，這一輩子都會忘不了。"
         }
       ],
-      meals: { b: "飯店內自助式", l: "波西米亞豬腳餐", d: "中式八菜一湯" },
+      meals: { b: "飯店內自助式", l: "溫泉區風味料理", d: "中式八菜一湯" },
       stay: "布拉格（連泊第 1 晚）",
       hotelImg: "assets/img/hotel-prague.jpg",
       hotelDesc: "沉醉布拉格中心精華地段，從大廳出來逛街幾十分鐘，即可抵達布拉格舊城廣場、購物精品大街，以及市區景點。",
@@ -213,6 +214,7 @@ window.TRIP = {
     },
     {
       day: 6,
+      date: "12/08（二）",
       title: "布拉格 城堡區・聖維特大教堂・自由活動",
       tagline: "千塔之城一日漫遊",
       route: ["prague"],
@@ -225,7 +227,7 @@ window.TRIP = {
         {
           name: "布拉格城堡區", en: "Hradčany", type: "ticket", badge: "含專業導遊", lat: 50.09058, lng: 14.40157,
           img: "assets/img/d6-hradcany.jpg",
-          desc: "跟著專業導遊走訪布拉格城堡，氣魄依舊的古皇宮，展示極致華麗的皇冠、權杖、宴會廳等，象徵往昔的權力與強盛；還有童話般靈巧的黃金小徑，造訪22號藍色小屋，是作家卡夫卡的故居。",
+          desc: "跟著專業導遊走訪布拉格城堡區，充滿氣魄的古皇宮，展示華麗的皇冠、權杖、宴會廳等，象徵皇室的興盛，已列世界遺產。還有童話般靈巧的黃金小徑，造訪22號藍色小屋，是作家卡夫卡的故居。",
           stops: [
             { name: "古皇宮", en: "Old Royal Palace", type: "ticket", lat: 50.09058, lng: 14.40157 },
             { name: "黃金小徑", en: "Golden Lane", type: "ticket", lat: 50.09206, lng: 14.40427 }
@@ -256,6 +258,7 @@ window.TRIP = {
     },
     {
       day: 7,
+      date: "12/09（三）",
       title: "布拉格－帖契－維也納",
       tagline: "摩拉維亞古城到音樂之都",
       route: ["prague", "telc", "vienna"],
@@ -282,6 +285,7 @@ window.TRIP = {
     },
     {
       day: 8,
+      date: "12/10（四）",
       title: "維也納 市區觀光・熊布朗宮・自由活動",
       tagline: "哈布斯堡的帝國榮光",
       route: ["vienna"],
@@ -316,6 +320,7 @@ window.TRIP = {
     },
     {
       day: 9,
+      date: "12/11（五）",
       title: "維也納 ✈ 台北",
       tagline: "美好的旅程・我們下次再見",
       mode: "flight",
@@ -324,7 +329,7 @@ window.TRIP = {
       intro: "溫柔包好繽紛的紀念品，以及難忘的旅遊回憶，我們即將踏上歸途，和煦的風，會一直伴隨我們，祝福大家並歡迎下次再來作客！",
       img: "assets/img/d9-airport.jpg",
       sights: [],
-      meals: { b: "飯店內自助式", l: "依航班時間在飛機上或自理餐，請以說明會資料為最終確認", d: "飛機上" },
+      meals: { b: "飯店內自助式", l: "配合航班時間，本餐敬請自理", d: "飛機上" },
       stay: "夜宿機上",
       hotels: [],
       included: [],
@@ -332,6 +337,7 @@ window.TRIP = {
     },
     {
       day: 10,
+      date: "12/12（六）",
       title: "抵達台北",
       tagline: "分享您的旅行感動",
       mode: "flight",
@@ -347,18 +353,13 @@ window.TRIP = {
     }
   ],
 
-  // 連泊城市的飯店備選（Day 5–6 布拉格、Day 7–8 維也納共用）
+  // 連泊城市的飯店（Day 5–6 布拉格、Day 7–8 維也納共用）
   hotelSets: {
     prague: [
-      { name: "Hilton Prague Old Town", stars: 5, lat: 50.08877, lng: 14.43193 },
-      { name: "Art Nouveau Palace Hotel", stars: 5, lat: 50.08392, lng: 14.42770 },
-      { name: "Prague Marriott", stars: 5, lat: 50.08798, lng: 14.43153 },
-      { name: "Art Deco Imperial Hotel", stars: 5, lat: 50.08992, lng: 14.43281 }
+      { name: "Hilton Prague Old Town", stars: 5, lat: 50.08877, lng: 14.43175, addr: "V Celnici 7, 110 00 Prague 1, Czech Republic", tel: "+420-224-842-300" }
     ],
     vienna: [
-      { name: "Eurostars Grand Hotel Wien", stars: 5, lat: 48.20213, lng: 16.37197 },
-      { name: "InterContinental Vienna", stars: 5, lat: 48.20176, lng: 16.37900 },
-      { name: "Hilton Vienna Park", stars: 5, lat: 48.20599, lng: 16.38331 }
+      { name: "Eurostars Grand Hotel Wien", stars: 5, lat: 48.20209, lng: 16.37195, addr: "Kärntner Ring 9, 1010 Wien, Austria", tel: "+43-1-515800" }
     ]
   }
 };
