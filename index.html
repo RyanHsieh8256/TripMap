@@ -53,6 +53,7 @@
         <div class="toggles" role="group" aria-label="圖層">
           <label><input type="checkbox" id="tgSights" checked> 景點</label>
           <label><input type="checkbox" id="tgHotels" checked> 飯店</label>
+          <label><input type="checkbox" id="tgNotes" checked> 筆記</label>
           <select id="baseSel" aria-label="底圖">
             <option value="canvas">簡潔</option>
             <option value="street">街道</option>
@@ -70,6 +71,8 @@
           <li><span class="lg lg-sight">★</span>入內參觀（團費含）</li>
           <li><span class="lg lg-sight">◆</span>自由活動推薦</li>
           <li><span class="lg lg-hotel"></span>住宿飯店</li>
+          <li><span class="lg lg-note">♥</span>我的筆記（Day 6–8）</li>
+          <li><span class="lg lg-cand">景</span>推薦地點（展開清單時）</li>
           <li><span class="lg lg-road"></span>遊覽車（每日一色）</li>
           <li><span class="lg lg-flight"></span>飛機</li>
         </ul>
@@ -80,6 +83,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="data/itinerary.js"></script>
   <script src="data/routes.js"></script>
+  <script src="data/suggestions.js"></script>
+  <script src="assets/js/notes.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

@@ -228,13 +228,13 @@
       const tip = `Day ${d.day}・${place(from).name} → ${place(to).name}${d.km ? `（${d.km[i]} km）` : ""}`;
       if (flight) {
         const line = L.polyline(pts, { color, weight: 2.5, dashArray: "6 8", opacity: 0.85 }).addTo(map);
-        line.bindTooltip(tip, { sticky: true, className: "route-tip" }).on("click", () => selectDay(d.day, { user: true }));
+        line.bindTooltip(tip, { sticky: true, className: "route-tip" }).on("click", () => !notes?.isPicking() && selectDay(d.day, { user: true }));
         parts.lines.push(line);
       } else {
         const casing = L.polyline(pts, { weight: 8, opacity: 0.9, className: "route-casing", interactive: false }).addTo(map);
         const line = L.polyline(pts, { color, weight: 4.5, opacity: 0.95 }).addTo(map);
         const flow = L.polyline(pts, { color: "#fff", weight: 2, opacity: 0, className: "route-flow", interactive: false }).addTo(map);
-        line.bindTooltip(tip, { sticky: true, className: "route-tip" }).on("click", () => selectDay(d.day, { user: true }));
+        line.bindTooltip(tip, { sticky: true, className: "route-tip" }).on("click", () => !notes?.isPicking() && selectDay(d.day, { user: true }));
         parts.casings.push(casing); parts.lines.push(line); parts.flows.push(flow);
       }
     }
@@ -372,6 +372,7 @@
       toggleLayer(g.sights, on && show.sights);
       toggleLayer(g.hotels, on && show.hotels);
     });
+    if (notes) notes.sync();
   }
   function toggleLayer(layer, on) {
     if (on && !map.hasLayer(layer)) layer.addTo(map);
@@ -390,6 +391,7 @@
       for (let i = 0; i < d.route.length - 1; i++) pts.push(...legLines[`${n}-${i}`]);
       d.sights.forEach((_, i) => pts.push(...sightRefs[`${n}-${i}`].pts));
       hotelsOf(d).forEach((h) => pts.push([h.lat, h.lng]));
+      if (notes) pts.push(...notes.pointsFor(n));
     }
     return L.latLngBounds(pts);
   }
@@ -413,6 +415,11 @@
     c.toggle("z-near", z >= 13); // 街道尺度：隱藏城市標記，讓景點露出來
   }
   map.on("zoomend", zoomClasses);
+
+  // ---------- 自由行筆記（assets/js/notes.js，資料存在 localStorage） ----------
+  const notes = window.TripNotes
+    ? window.TripNotes({ map, T, esc, flyPoint, dayColor: (n) => DAY_COLORS[n], getCurrent: () => current })
+    : null;
 
   // ---------- panel rendering ----------
   const panelBody = $("#panelBody");
@@ -456,6 +463,8 @@
           </button></li>`).join("")}
         </ul>
       </section>
+
+      ${notes ? notes.overviewHtml() : ""}
 
       <section class="section">
         <h2 class="section-title">設計理念</h2>
@@ -545,6 +554,8 @@
         ${d.sights.map((s, i) => sightCard(d, s, i)).join("")}
       </section>` : ""}
 
+      ${notes ? notes.sectionHtml(d.day) : ""}
+
       ${(d.info || []).length ? `<section class="section"><h2 class="section-title">貼心服務</h2><div class="cards">
         ${d.info.map((x) => `<div class="card"><h3>${esc(x.title)}</h3><p>${esc(x.desc)}</p></div>`).join("")}
       </div></section>` : ""}
@@ -607,6 +618,7 @@
       panelBody.innerHTML = n ? renderDay(dayOf(n)) : renderOverview();
       panelBody.scrollTop = 0;
     }
+    if (notes) notes.onDay(n);
     tabs.querySelectorAll(".tab").forEach((b) => {
       const on = +b.dataset.gotoDay === n;
       b.setAttribute("aria-selected", on);
@@ -726,6 +738,7 @@
   $("#nextBtn").addEventListener("click", () => selectDay(current + 1, { user: true }));
 
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && notes && notes.cancelPick()) return; // 先取消「在地圖上加點」
     if (e.target.closest("input, textarea, select") || e.altKey || e.ctrlKey || e.metaKey) return;
     if (e.key === "ArrowRight") selectDay(current + 1, { user: true });
     else if (e.key === "ArrowLeft") selectDay(current - 1, { user: true });
@@ -734,6 +747,7 @@
 
   $("#tgSights").addEventListener("change", (e) => { show.sights = e.target.checked; syncLayers(); });
   $("#tgHotels").addEventListener("change", (e) => { show.hotels = e.target.checked; syncLayers(); });
+  $("#tgNotes")?.addEventListener("change", (e) => notes && notes.setShow(e.target.checked));
 
   if (matchMedia("(max-width: 899px)").matches) $("#legend").open = false;
 

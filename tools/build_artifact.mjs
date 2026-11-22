@@ -18,7 +18,7 @@ const body = html
   .replace(/\s*<script[\s\S]*?<\/script>/g, "") // 移除原本的 script，下面重新內嵌
   .trim();
 
-const inlineScripts = ["data/itinerary.js", "data/routes.js", "data/basemap.js", "assets/js/app.js"]
+const inlineScripts = ["data/itinerary.js", "data/routes.js", "data/basemap.js", "data/suggestions.js", "assets/js/notes.js", "assets/js/app.js"]
   .map((p) => `<script>/* ${p} */\n${safe(read(p))}</script>`)
   .join("\n");
 
